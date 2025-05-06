@@ -1,4 +1,5 @@
 import * as userServices from './userServices';
+import * as httpRequest from '../utils/httpRequest';
 
 const authKey = 'AUTH_KEY';
 
@@ -8,13 +9,13 @@ export const saveUser = (user) => {
 
 export const login = async (email, password) => {
     try {
-        const user = await userServices.getAllUsers();
-        const foundUser = user.data.find(u => u.email === email && u.password === password);
-        if (foundUser) {
-            saveUser(foundUser);
-            return foundUser;
+        const response = await httpRequest.post('/auth/login', { email, password });
+        if (response.status === 200) {
+            const user = response.data;
+            saveUser(user);
+            return user;
         } else {
-            throw new Error('Invalid email or password');
+            throw new Error('Login failed: ' + response.data.message);
         }
     } catch (error) {
         console.error('Error logging in:', error);
@@ -24,10 +25,6 @@ export const login = async (email, password) => {
 
 export const register = async (user) => {
     try {
-        const existingUsers = await userServices.getAllUsers();
-        if (existingUsers.data.some(existingUser => existingUser.email === user.email)) {
-            throw new Error('Email already exists');
-        }
         const newUser = await userServices.createUser(user);
         saveUser(newUser.data);
         return newUser.data;

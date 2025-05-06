@@ -21,15 +21,9 @@ export const getUserById = async (userId) => {
 }
 
 export const createUser = async (user) => {
-    const res = await getAllUsers();
-    const users = res.data;
-
-    if (users.some(existingUser => existingUser.email === user.email)) {
-        throw new Error('Email already exists');
-    }
-
     try {
-        const response = await httpRequest.post('/users', user);
+        const response = await httpRequest.post('/auth/register', user);
+        console.log('User created successfully:', response);
         return response;
     } catch (error) {
         console.error('Error creating user:', error);
