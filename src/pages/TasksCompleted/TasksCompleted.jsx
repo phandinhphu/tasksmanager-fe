@@ -66,7 +66,20 @@ export default function TasksCompleted() {
         );
     }
 
+    const handleOpenDialog = (task) => {
+        setSelectedTask(task);
+        setOpenDialog(true);
+    };
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+        setSelectedTask(null);
+    };
+
     const handleDelete = (task) => {
+        setResponse({});
+        setSnackbarOpen(false);
+
         if (task.maintask_id) {
             // Nếu là subtask thì tìm maintask chứa subtask cần xóa
             const mainTask = tasks.find((t) => t._id === task.maintask_id);
@@ -86,12 +99,14 @@ export default function TasksCompleted() {
                                 status: 'success',
                                 message: `Đã xóa subtask "${task.task_name}"`,
                             });
+                            setSnackbarOpen(true);
                         },
                         onError: (error) => {
                             setResponse({
                                 status: 'error',
                                 message: `Lỗi khi xoá subtask "${task.task_name}"`,
                             });
+                            setSnackbarOpen(true);
                         },
                     },
                 );
@@ -104,17 +119,19 @@ export default function TasksCompleted() {
                         status: 'success',
                         message: `Đã xoá task "${task.task_name}"`,
                     });
+                    setSnackbarOpen(true);
                 },
                 onError: (error) => {
                     setResponse({
                         status: 'error',
                         message: `Lỗi khi xoá task "${task.task_name}"`,
                     });
+                    setSnackbarOpen(true);
                 },
             });
         }
 
-        setSnackbarOpen(true);
+        handleCloseDialog();
     };
 
     return (
@@ -170,7 +187,7 @@ export default function TasksCompleted() {
                                     color="error"
                                     size="small"
                                     sx={{ position: 'absolute', top: 8, right: 8, bgcolor: 'white' }}
-                                    onClick={() => setOpenDialog(true) && setSelectedTask(task)}
+                                    onClick={() => handleOpenDialog(task)}
                                 >
                                     <DeleteIcon />
                                 </IconButton>
@@ -191,7 +208,7 @@ export default function TasksCompleted() {
 
             <DialogConfirm
                 openDialog={openDialog}
-                onOpen={() => setOpenDialog(false)}
+                onOpen={handleCloseDialog}
                 onDelete={() => handleDelete(selectedTask)}
             />
 

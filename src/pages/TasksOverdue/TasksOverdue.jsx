@@ -10,6 +10,7 @@ import DialogConfirm from '../../components/DialogConfirm/DialogConfirm';
 import confetti from 'canvas-confetti';
 import { useTasks, useDeleteTask, useUpdateTaskComplete, useUpdateSubtaskComplete } from '../../hooks/tasks';
 import { useStatusPriority } from '../../hooks/status-priority';
+import { se } from 'date-fns/locale';
 
 export default function TasksOverdue() {
     const { data: tasks = [], isLoading, isFetching } = useTasks();
@@ -62,7 +63,20 @@ export default function TasksOverdue() {
 
     const paginatedTasks = filteredTasks.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 
+    const handleOpenDialog = (task) => {
+        setSelectedTask(task);
+        setOpenDialog(true);
+    };
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+        setSelectedTask(null);
+    };
+
     const handleDelete = (task) => {
+        setResponse({});
+        setSnackbarOpen(false);
+
         if (task.maintask_id) {
             // Nếu là subtask thì tìm maintask chứa subtask cần xóa
             const mainTask = tasks.find((t) => t._id === task.maintask_id);
@@ -82,12 +96,14 @@ export default function TasksOverdue() {
                                 status: 'success',
                                 message: `Đã xóa subtask "${task.task_name}"`,
                             });
+                            setSnackbarOpen(true);
                         },
                         onError: (error) => {
                             setResponse({
                                 status: 'error',
                                 message: `Lỗi khi xoá subtask "${task.task_name}"`,
                             });
+                            setSnackbarOpen(true);
                         },
                     },
                 );
@@ -100,17 +116,19 @@ export default function TasksOverdue() {
                         status: 'success',
                         message: `Đã xoá task "${task.task_name}"`,
                     });
+                    setSnackbarOpen(true);
                 },
                 onError: (error) => {
                     setResponse({
                         status: 'error',
                         message: `Lỗi khi xoá task "${task.task_name}"`,
                     });
+                    setSnackbarOpen(true);
                 },
             });
         }
 
-        setSnackbarOpen(true);
+        handleCloseDialog();
     };
 
     const handleComplete = (id) => {
@@ -206,7 +224,7 @@ export default function TasksOverdue() {
                                     color="error"
                                     size="small"
                                     sx={{ position: 'absolute', top: 8, right: 8, bgcolor: 'white' }}
-                                    onClick={() => setOpenDialog(true) && setSelectedTask(task)}
+                                    onClick={() => handleOpenDialog(task)}
                                 >
                                     <DeleteIcon />
                                 </IconButton>
@@ -236,7 +254,7 @@ export default function TasksOverdue() {
 
             <DialogConfirm
                 openDialog={openDialog}
-                onOpen={() => setOpenDialog(false)}
+                onOpen={handleCloseDialog}
                 onDelete={() => handleDelete(selectedTask)}
             />
 
