@@ -12,6 +12,17 @@ export const useTasks = () => {
   });
 }
 
+export const useStatsTasks = () => {
+
+  return useQuery({
+    queryKey: ['statsTasks'],
+    queryFn: () => taskServices.getTaskStatistics(),
+    enabled: true,
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
+}
+
 export const useCreateTask = () => {
   const queryClient = useQueryClient();
 

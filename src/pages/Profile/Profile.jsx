@@ -1,33 +1,22 @@
-import React, { useEffect, useState } from 'react';
 import { Box, Card, CardContent, Typography, Avatar, Grid, Container, Divider } from '@mui/material';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useAuth } from '../../hooks/auth';
-import * as taskServices from '../../services/taskServices';
+import { useStatsTasks } from '../../hooks/tasks';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ProfilePage = () => {
     const { user } = useAuth();
-    const [stats, setStats] = useState({
-        total: 0,
-        completed: 0,
-        inProgress: 0,
-        overdue: 0,
-        subtasks: 0,
-    });
+    const { data: statsTasks = {}, isLoading, isFetching } = useStatsTasks();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await taskServices.getTaskStatistics();
-                setStats(data);
-            } catch (error) {
-                console.error('Error fetching task statistics:', error);
-            }
-        };
-        fetchData();
-    }, []);
+    if (isLoading || isFetching) {
+        return (
+            <Typography variant="h6" align="center">
+                Loading...
+            </Typography>
+        );
+    }
 
     return (
         <Container maxWidth="md" sx={{ mt: 4, p: 2 }}>
@@ -59,7 +48,7 @@ const ProfilePage = () => {
                                 <CardContent>
                                     <Typography color="text.secondary">Tổng công việc</Typography>
                                     <Typography variant="h5" fontWeight="bold">
-                                        {stats.total}
+                                        {statsTasks.total}
                                     </Typography>
                                 </CardContent>
                             </Card>
@@ -69,7 +58,7 @@ const ProfilePage = () => {
                                 <CardContent>
                                     <Typography color="text.secondary">Hoàn thành</Typography>
                                     <Typography variant="h5" fontWeight="bold" color="green">
-                                        {stats.completed}
+                                        {statsTasks.completed}
                                     </Typography>
                                 </CardContent>
                             </Card>
@@ -79,7 +68,7 @@ const ProfilePage = () => {
                                 <CardContent>
                                     <Typography color="text.secondary">Đang làm</Typography>
                                     <Typography variant="h5" fontWeight="bold" color="orange">
-                                        {stats.inProgress}
+                                        {statsTasks.inProgress}
                                     </Typography>
                                 </CardContent>
                             </Card>
@@ -89,7 +78,7 @@ const ProfilePage = () => {
                                 <CardContent>
                                     <Typography color="text.secondary">Quá hạn</Typography>
                                     <Typography variant="h5" fontWeight="bold" color="red">
-                                        {stats.overdue}
+                                        {statsTasks.overdue}
                                     </Typography>
                                 </CardContent>
                             </Card>
@@ -99,7 +88,7 @@ const ProfilePage = () => {
                                 <CardContent>
                                     <Typography color="text.secondary">Tổng công việc phụ</Typography>
                                     <Typography variant="h5" fontWeight="bold" color="#6a1b9a">
-                                        {stats.subtasks}
+                                        {statsTasks.subtasks}
                                     </Typography>
                                 </CardContent>
                             </Card>
@@ -107,7 +96,7 @@ const ProfilePage = () => {
                     </Grid>
                 </CardContent>
             </Card>
-            {stats.completed || stats.inProgress || stats.overdue ? (
+            {statsTasks.completed || statsTasks.inProgress || statsTasks.overdue ? (
                 <Box mt={4}>
                     <Typography variant="h6" gutterBottom>
                         Biểu đồ công việc
@@ -118,7 +107,7 @@ const ProfilePage = () => {
                                 labels: ['Hoàn thành', 'Đang làm', 'Quá hạn'],
                                 datasets: [
                                     {
-                                        data: [stats.completed, stats.inProgress, stats.overdue],
+                                        data: [statsTasks.completed, statsTasks.inProgress, statsTasks.overdue],
                                         backgroundColor: ['#66bb6a', '#ffa726', '#ef5350'],
                                         borderWidth: 1,
                                     },

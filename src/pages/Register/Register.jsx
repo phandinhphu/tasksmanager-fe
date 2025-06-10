@@ -156,7 +156,40 @@ export default function Register() {
     return (
         <>
             <CssBaseline enableColorScheme />
-            <RegisterContainer direction="column" justifyContent="space-between">
+            <RegisterContainer
+                direction={{ xs: 'column', md: 'row' }}
+                justifyContent="center"
+                alignItems="center"
+                spacing={4}
+            >
+                <Box
+                    sx={{
+                        flex: 1,
+                        display: { xs: 'none', md: 'flex' },
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        justifyContent: 'center',
+                        pr: 4,
+                        maxWidth: 400, // Giới hạn chiều rộng
+                    }}
+                >
+                    <Typography variant="h4" sx={{ mb: 1, fontWeight: 700 }}>
+                        Chào mừng đến với Tasks Manager!
+                    </Typography>
+                    <Typography variant="body1" sx={{ color: 'text.secondary', mb: 2 }}>
+                        Tasks Manager là nền tảng giúp bạn:
+                    </Typography>
+                    <ul style={{ margin: 0, paddingLeft: 20, color: '#555', fontSize: 16 }}>
+                        <li>Quản lý công việc cá nhân và lịch học dễ dàng</li>
+                        <li>Theo dõi tiến độ từng công việc</li>
+                        <li>Nhắc nhở deadline tự động</li>
+                        <li>Truy cập mọi lúc, mọi nơi</li>
+                    </ul>
+                    <Typography variant="body2" sx={{ color: 'text.secondary', mt: 2 }}>
+                        Đăng nhập để bắt đầu trải nghiệm quản lý công việc hiệu quả hơn!
+                    </Typography>
+                </Box>
+
                 <Card variant="outlined" sx={{ overflowY: 'auto' }}>
                     <Typography
                         component="h1"
