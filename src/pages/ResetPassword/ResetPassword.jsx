@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Button, TextField, Typography, Paper, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import LoadingDialog from '../../components/LoadingDialog';
 import { useAuth } from '../../hooks/auth';
 
 const ResetPassword = () => {
@@ -25,9 +26,13 @@ const ResetPassword = () => {
     const [confirmError, setConfirmError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setGeneralErrorMessage('');
+        setPasswordError('');
+        setConfirmError('');
 
         if (password === '' && password.length < 6) {
             setPasswordError('Mật khẩu phải có ít nhất 6 ký tự');
@@ -39,12 +44,16 @@ const ResetPassword = () => {
             return;
         }
 
+        setLoading(true);
+
         try {
             await resetPassword(token, password);
             navigate('/login');
         } catch (error) {
             console.error('Lỗi khi đặt lại mật khẩu:', error);
             setGeneralErrorMessage('Đặt lại mật khẩu không thành công. Vui lòng thử lại sau.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -121,6 +130,9 @@ const ResetPassword = () => {
                     </Button>
                 </form>
             </Paper>
+
+            {/* Loading indicator */}
+            {loading && <LoadingDialog open={loading} />}
         </Box>
     );
 };
