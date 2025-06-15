@@ -29,6 +29,6 @@ const DialogConfirm = ({ openDialog, onOpen, onDelete }) => {
             </DialogActions>
         </Dialog>
     );
-}
+};
 
 export default DialogConfirm;

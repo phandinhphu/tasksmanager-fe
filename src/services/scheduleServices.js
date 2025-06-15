@@ -11,7 +11,7 @@ export const getSchedulesByUserId = async () => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const createSchedule = async (schedule) => {
     try {
@@ -24,7 +24,7 @@ export const createSchedule = async (schedule) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const updateSchedule = async (scheduleId, updatedSchedule) => {
     try {
@@ -37,7 +37,7 @@ export const updateSchedule = async (scheduleId, updatedSchedule) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const deleteSchedule = async (scheduleId) => {
     try {
@@ -50,4 +50,4 @@ export const deleteSchedule = async (scheduleId) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};

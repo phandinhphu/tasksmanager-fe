@@ -11,4 +11,4 @@ export const updateUser = async (user) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};

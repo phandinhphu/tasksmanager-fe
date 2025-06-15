@@ -10,7 +10,7 @@ export const login = async (email, password) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const register = async (user) => {
     try {
@@ -24,7 +24,7 @@ export const register = async (user) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const logout = async () => {
     try {
@@ -36,7 +36,7 @@ export const logout = async () => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const forgotPassword = async (email) => {
     try {
@@ -49,7 +49,7 @@ export const forgotPassword = async (email) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const resetPassword = async (token, newPassword) => {
     try {
@@ -62,7 +62,7 @@ export const resetPassword = async (token, newPassword) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const getCurrentUser = async () => {
     try {
@@ -75,4 +75,4 @@ export const getCurrentUser = async () => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};

@@ -1,18 +1,17 @@
-
 export const sortTasks = (tasks) => {
     const now = new Date();
 
     const statusOrder = {
         'In Progress': 1,
         'To Do': 2,
-        'Completed': 3,
-        'Overdue': 4,
+        Completed: 3,
+        Overdue: 4,
     };
 
     const priorityOrder = {
-        'High': 1,
-        'Medium': 2,
-        'Low': 3,
+        High: 1,
+        Medium: 2,
+        Low: 3,
     };
 
     return [...tasks].sort((a, b) => {
@@ -42,7 +41,7 @@ export const sortTasks = (tasks) => {
         if (!isInProgressA && isInProgressB) return 1;
 
         if (isInProgressA && isInProgressB) {
-        if (timeDiffA !== timeDiffB) return timeDiffA - timeDiffB;
+            if (timeDiffA !== timeDiffB) return timeDiffA - timeDiffB;
         }
 
         // So sánh theo status
@@ -54,4 +53,4 @@ export const sortTasks = (tasks) => {
         // So sánh theo deadline
         return endDateA - endDateB;
     });
-}
+};

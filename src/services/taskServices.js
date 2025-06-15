@@ -11,7 +11,7 @@ export const getAllTasks = async () => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const getTasksByUserId = async () => {
     try {
@@ -24,7 +24,7 @@ export const getTasksByUserId = async () => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const createTask = async (task) => {
     try {
@@ -37,7 +37,7 @@ export const createTask = async (task) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const updateTask = async (taskId, updatedTask) => {
     try {
@@ -50,7 +50,7 @@ export const updateTask = async (taskId, updatedTask) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const deleteTask = async (taskId) => {
     try {
@@ -63,7 +63,7 @@ export const deleteTask = async (taskId) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const getTaskById = async (taskId) => {
     try {
@@ -76,7 +76,7 @@ export const getTaskById = async (taskId) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 export const getStatusTask = async () => {
     try {
@@ -86,7 +86,7 @@ export const getStatusTask = async () => {
         console.error('Error fetching status:', error);
         throw new Error('Error fetching status: ' + error.message);
     }
-} 
+};
 
 export const getPriorityTask = async () => {
     try {
@@ -96,7 +96,7 @@ export const getPriorityTask = async () => {
         console.error('Error fetching priority:', error);
         throw new Error('Error fetching priority: ' + error.message);
     }
-}
+};
 
 // Lấy thống kê task
 export const getTaskStatistics = async () => {
@@ -110,10 +110,10 @@ export const getTaskStatistics = async () => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 // Cập nhật trạng thái hoàn thành của task
-export const updateTaskComplete= async (taskId) => {
+export const updateTaskComplete = async (taskId) => {
     try {
         const response = await httpRequest.put(`/tasks/${taskId}/complete`);
         return response;
@@ -124,7 +124,7 @@ export const updateTaskComplete= async (taskId) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};
 
 // Cập nhật trạng thái hoàn thành của subtask
 export const updateSubTaskComplete = async (taskId, subTaskId) => {
@@ -138,4 +138,4 @@ export const updateSubTaskComplete = async (taskId, subTaskId) => {
             throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }
-}
+};

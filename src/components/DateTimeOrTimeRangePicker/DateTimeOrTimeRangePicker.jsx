@@ -47,12 +47,7 @@ const DateTimeOrTimeRangePicker = ({ value, mainTask, onChange }) => {
 
     return (
         <Box>
-            <RadioGroup
-                row
-                value={pickerType}
-                onChange={handlePickerTypeChange}
-                sx={{ mb: 2 }}
-            >
+            <RadioGroup row value={pickerType} onChange={handlePickerTypeChange} sx={{ mb: 2 }}>
                 <FormControlLabel value="dateTime" control={<Radio />} label="Chọn ngày giờ" />
                 <FormControlLabel value="timeRange" control={<Radio />} label="Chọn khoảng thời gian" />
             </RadioGroup>
@@ -71,11 +66,11 @@ const DateTimeOrTimeRangePicker = ({ value, mainTask, onChange }) => {
                             slots={{ textField: TextField }}
                             slotProps={{
                                 textField: {
-                                    margin: "dense",
+                                    margin: 'dense',
                                     fullWidth: true,
                                     error: !!dateError,
-                                    helperText: dateError ? "Ngày không hợp lệ" : "",
-                                }
+                                    helperText: dateError ? 'Ngày không hợp lệ' : '',
+                                },
                             }}
                         />
                         <DateTimePicker
@@ -89,11 +84,11 @@ const DateTimeOrTimeRangePicker = ({ value, mainTask, onChange }) => {
                             slots={{ textField: TextField }}
                             slotProps={{
                                 textField: {
-                                    margin: "dense",
+                                    margin: 'dense',
                                     fullWidth: true,
                                     error: !!dateError,
-                                    helperText: dateError ? "Ngày không hợp lệ" : "",
-                                }
+                                    helperText: dateError ? 'Ngày không hợp lệ' : '',
+                                },
                             }}
                         />
                     </Box>
@@ -110,11 +105,11 @@ const DateTimeOrTimeRangePicker = ({ value, mainTask, onChange }) => {
                             slots={{ textField: TextField }}
                             slotProps={{
                                 textField: {
-                                    margin: "dense",
+                                    margin: 'dense',
                                     fullWidth: true,
                                     error: !!dateError,
-                                    helperText: dateError ? "Giờ không hợp lệ" : "",
-                                }
+                                    helperText: dateError ? 'Giờ không hợp lệ' : '',
+                                },
                             }}
                         />
                         <TimePicker
@@ -128,11 +123,11 @@ const DateTimeOrTimeRangePicker = ({ value, mainTask, onChange }) => {
                             slots={{ textField: TextField }}
                             slotProps={{
                                 textField: {
-                                    margin: "dense",
+                                    margin: 'dense',
                                     fullWidth: true,
                                     error: !!dateError,
-                                    helperText: dateError ? "Giờ không hợp lệ" : "",
-                                }
+                                    helperText: dateError ? 'Giờ không hợp lệ' : '',
+                                },
                             }}
                         />
                     </Box>

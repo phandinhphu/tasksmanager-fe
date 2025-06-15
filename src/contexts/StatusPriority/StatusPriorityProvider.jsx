@@ -1,12 +1,6 @@
-import {
-    useState,
-    useEffect,
-} from "react";
-import {
-    getStatusTask,
-    getPriorityTask,
-} from "../../services/taskServices";
-import Context from "./Context";
+import { useState, useEffect } from 'react';
+import { getStatusTask, getPriorityTask } from '../../services/taskServices';
+import Context from './Context';
 
 export const StatusPriorityProvider = ({ children }) => {
     const [statusTask, setStatusTask] = useState([]);
@@ -18,7 +12,7 @@ export const StatusPriorityProvider = ({ children }) => {
                 const data = await getStatusTask();
                 setStatusTask(data);
             } catch (error) {
-                console.error("Error fetching status task:", error);
+                console.error('Error fetching status task:', error);
             }
         };
 
@@ -27,7 +21,7 @@ export const StatusPriorityProvider = ({ children }) => {
                 const data = await getPriorityTask();
                 setPriorityTask(data);
             } catch (error) {
-                console.error("Error fetching priority task:", error);
+                console.error('Error fetching priority task:', error);
             }
         };
 

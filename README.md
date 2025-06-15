@@ -49,14 +49,14 @@
 
 ## Hướng dẫn cài đặt & chạy dự án
 
-1. **Cài đặt dependencies**  
-   ```sh
-   npm install
+1. **Cài đặt dependencies**
+    ```sh
+    npm install
     ```
 2. **Chạy dự án**
-   ```sh
-   npm run dev
-   ```
+    ```sh
+    npm run dev
+    ```
 3. **Build production**
     ```sh
     npm run build
@@ -71,6 +71,7 @@
     ```
 
 ## Hướng dẫn sử dụng
+
 1. **Tạo tài khoản**: Đăng ký tài khoản mới hoặc đăng nhập nếu đã có tài khoản.
 2. **Tạo công việc**: Nhấn nút "Thêm công việc" để tạo task mới.
 3. **Quản lý công việc**: Sử dụng các tính năng lọc, tìm kiếm, chỉnh sửa và xóa công việc.
@@ -80,6 +81,7 @@
 7. **Xem hướng dẫn**: Truy cập trang "Hướng dẫn" để biết thêm thông tin chi tiết về cách sử dụng ứng dụng.
 
 ## Tài liệu tham khảo
+
 - [React](https://reactjs.org/docs/getting-started.html)
 - [Vite](https://vitejs.dev/guide/)
 - [Material UI (MUI)](https://mui.com/getting-started/installation/)
@@ -91,8 +93,10 @@
 - [ESLint](https://eslint.org/docs/user-guide/getting-started)
 
 ## Đóng góp
+
 Nếu bạn muốn đóng góp vào dự án này, vui lòng tạo một pull request hoặc mở issue để thảo luận về các thay đổi. Mọi ý kiến đóng góp đều được hoan nghênh!
 
 ## Tác giả
+
 - **Nguyễn Văn A** - [GitHub](https://github.com/nguyenvana)
 - **Trần Thị B** - [GitHub](https://github.com/tranthib)
