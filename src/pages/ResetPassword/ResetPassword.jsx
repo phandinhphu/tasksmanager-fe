@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Box, Button, TextField, Typography, Paper, InputAdornment, IconButton } from '@mui/material';
+import { Box, Button, TextField, Typography, Paper, InputAdornment, IconButton, Alert } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import LoadingDialog from '../../components/LoadingDialog';
 import { useAuth } from '../../hooks/auth';
@@ -50,10 +50,12 @@ const ResetPassword = () => {
             await resetPassword(token, password);
             navigate('/login');
         } catch (error) {
-            console.error('Lỗi khi đặt lại mật khẩu:', error);
-            setGeneralErrorMessage('Đặt lại mật khẩu không thành công. Vui lòng thử lại sau.');
+            setGeneralErrorMessage(`Lỗi khi đặt lại mật khẩu: ${error.message}`);
         } finally {
             setLoading(false);
+            setTimeout(() => {
+                navigate('/login');
+            }, 2000);
         }
     };
 
