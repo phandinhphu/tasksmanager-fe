@@ -27,6 +27,17 @@ const AccountSettings = () => {
         reader.readAsDataURL(file);
     };
 
+    const readFileAsBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                resolve(reader.result);
+            };
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -59,40 +70,20 @@ const AccountSettings = () => {
 
         setLoading(true);
         try {
+            let updatedUser = { name, password };
+
             if (avatarFile) {
-                const reader = new FileReader();
-                reader.onloadend = async () => {
-                    const base64String = reader.result;
-                    const updatedUser = {
-                        name,
-                        password,
-                        avatar: base64String,
-                    };
+                const base64String = await readFileAsBase64(avatarFile);
+                updatedUser.avatar = base64String;
+            }
 
-                    const response = await userService.updateUser(updatedUser);
-                    if (response) {
-                        setResponse({
-                            status: 'success',
-                            message: 'Cập nhật thành công',
-                        });
-                        saveUser({ ...user, ...updatedUser });
-                    }
-                };
-                reader.readAsDataURL(avatarFile);
-            } else {
-                const updatedUser = {
-                    name,
-                    password,
-                };
-
-                const response = await userService.updateUser(updatedUser);
-                if (response) {
-                    setResponse({
-                        status: 'success',
-                        message: 'Cập nhật thành công',
-                    });
-                    saveUser({ ...user, ...updatedUser });
-                }
+            const response = await userService.updateUser(updatedUser);
+            if (response) {
+                setResponse({
+                    status: 'success',
+                    message: 'Cập nhật thành công',
+                });
+                saveUser({ ...user, ...updatedUser });
             }
         } catch (error) {
             setResponse({
@@ -104,6 +95,7 @@ const AccountSettings = () => {
             setAvatarFile(null);
             setAvatarPreview(null);
             setPassword('');
+            setConfirmPassword('');
             setSnackbarOpen(true);
         }
     };

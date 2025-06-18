@@ -114,8 +114,8 @@ const TodosPage = () => {
 
     const todayTasks = allTasks.filter(
         (task) =>
-            dayjs(task.start_date).tz().isAfter(startOfToday) &&
-            dayjs(task.start_date).tz().isBefore(endOfToday) &&
+            dayjs(task.start_date).tz().isSameOrAfter(startOfToday) &&
+            dayjs(task.start_date).tz().isSameOrBefore(endOfToday) &&
             task.status?.name === 'In Progress',
     );
     const upcomingTasks = allTasks.filter(
