@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Typography, Stack, TextField, InputAdornment, MenuItem, IconButton, Grid, Button } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import SearchIcon from '@mui/icons-material/Search';
@@ -10,7 +10,6 @@ import DialogConfirm from '../../components/DialogConfirm/DialogConfirm';
 import confetti from 'canvas-confetti';
 import { useTasks, useDeleteTask, useUpdateTaskComplete, useUpdateSubtaskComplete } from '../../hooks/tasks';
 import { useStatusPriority } from '../../hooks/status-priority';
-import { se } from 'date-fns/locale';
 
 export default function TasksOverdue() {
     const { data: tasks = [], isLoading, isFetching } = useTasks();
@@ -35,7 +34,7 @@ export default function TasksOverdue() {
                 const tmp = (task.subtasks || []).map((subtask) => ({
                     ...subtask,
                     maintask: task.name,
-                    maintask_id: task.id,
+                    maintask_id: task._id,
                 }));
                 acc.push(...tmp);
                 return acc;
@@ -258,7 +257,7 @@ export default function TasksOverdue() {
                 onDelete={() => handleDelete(selectedTask)}
             />
 
-            {response.message && (
+            {snackbarOpen && (
                 <SnackbarAlert snackbarOpen={snackbarOpen} onClose={() => setSnackbarOpen(false)} response={response} />
             )}
         </Box>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Avatar, Button, TextField, Typography, Grid, Paper, IconButton, InputAdornment, Box } from '@mui/material';
 import { Visibility, VisibilityOff, PhotoCamera } from '@mui/icons-material';
 import SnackbarAlert from '../../components/SnackbarAlert';
@@ -69,6 +69,9 @@ const AccountSettings = () => {
         }
 
         setLoading(true);
+        setResponse({});
+        setSnackbarOpen(false);
+
         try {
             let updatedUser = { name, password };
 
@@ -98,6 +101,33 @@ const AccountSettings = () => {
             setConfirmPassword('');
             setSnackbarOpen(true);
         }
+    };
+
+    const handleDeleteAccount = async () => {
+        if (!window.confirm('Bạn có chắc chắn muốn xóa tài khoản?')) return;
+
+        setLoading(true);
+        setResponse({});
+        setSnackbarOpen(false);
+
+        try {
+            const response = await userService.deleteAccount();
+            if (response) {
+                setResponse({
+                    status: 'success',
+                    message: 'Tài khoản đã được xóa thành công',
+                });
+                setSnackbarOpen(true);
+                saveUser(null); // Clear user data
+            }
+        } catch (error) {
+            setResponse({
+                status: 'error',
+                message: 'Xóa tài khoản thất bại',
+            });
+            setSnackbarOpen(true);
+        }
+        setLoading(false);
     };
 
     return (
@@ -187,6 +217,14 @@ const AccountSettings = () => {
                         <Grid item xs={12} textAlign="center">
                             <Button type="submit" variant="contained" color="primary">
                                 Lưu thay đổi
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="warning"
+                                sx={{ marginLeft: 2 }}
+                                onClick={handleDeleteAccount}
+                            >
+                                Xóa tài khoản
                             </Button>
                         </Grid>
                     </Grid>

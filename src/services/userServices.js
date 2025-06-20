@@ -12,3 +12,16 @@ export const updateUser = async (user) => {
         }
     }
 };
+
+export const deleteAccount = async () => {
+    try {
+        const response = await httpRequest.del('/user/me/delete-account');
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.message) {
+            throw new Error(error.response.data.message);
+        } else {
+            throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
+        }
+    }
+};
