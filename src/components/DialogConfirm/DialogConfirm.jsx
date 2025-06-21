@@ -18,7 +18,7 @@ const DialogConfirm = ({ openDialog, onClose, onDelete, text }) => {
                 <DialogContentText id="alert-dialog-description">{text}</DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={onOpen} color="primary">
+                <Button onClick={onClose} color="primary">
                     Hủy
                 </Button>
                 <Button onClick={onDelete} color="primary" autoFocus>
