@@ -5,19 +5,17 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 
-const DialogConfirm = ({ openDialog, onOpen, onDelete }) => {
+const DialogConfirm = ({ openDialog, onClose, onDelete, text }) => {
     return (
         <Dialog
             open={openDialog}
-            onClose={onOpen}
+            onClose={onClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
             <DialogTitle id="alert-dialog-title">Xác nhận xóa</DialogTitle>
             <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    Bạn có chắc chắn muốn xóa công việc này?
-                </DialogContentText>
+                <DialogContentText id="alert-dialog-description">{text}</DialogContentText>
             </DialogContent>
             <DialogActions>
                 <Button onClick={onOpen} color="primary">

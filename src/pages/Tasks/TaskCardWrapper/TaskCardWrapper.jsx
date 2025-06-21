@@ -16,6 +16,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CardTask from '../../../components/CardTask';
+import DialogConfirm from '../../../components/DialogConfirm';
 import EditTaskDialog from '../../../components/EditTaskDialog';
 
 const TaskCardWrapper = ({ task, onEdit, onDelete }) => {
@@ -77,18 +78,14 @@ const TaskCardWrapper = ({ task, onEdit, onDelete }) => {
             </Menu>
 
             {/* Hộp thoại xác nhận xoá */}
-            <Dialog open={confirmOpen} onClose={handleCancelDelete}>
-                <DialogTitle>Xác nhận xoá</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>Bạn có chắc chắn muốn xoá task "{task.task_name}"?</DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleCancelDelete}>Huỷ</Button>
-                    <Button onClick={handleConfirmDelete} color="error" variant="contained">
-                        Xoá
-                    </Button>
-                </DialogActions>
-            </Dialog>
+            {confirmOpen && (
+                <DialogConfirm
+                    openDialog={confirmOpen}
+                    onClose={handleCancelDelete}
+                    onDelete={handleConfirmDelete}
+                    text={`Bạn có chắc chắn muốn xóa công việc "${task.task_name}"?`}
+                />
+            )}
 
             {/* Card task nguyên bản */}
             <CardTask task={task} />

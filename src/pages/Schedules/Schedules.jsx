@@ -22,6 +22,7 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SnackbarAlert from '../../components/SnackbarAlert';
+import DialogConfirm from '../../components/DialogConfirm';
 import { useSchedules, useUpdateSchedule, useDeleteSchedule } from '../../hooks/schedules';
 import EditScheduleDialog from '../../components/EditScheduleDialog';
 
@@ -192,20 +193,12 @@ const Schedules = () => {
 
             {/* Hộp thoại xác nhận xoá */}
             {openDeleteDialog && (
-                <Dialog open={openDeleteDialog} onClose={() => setDeleteOpenDialog(false)}>
-                    <DialogTitle>Xác nhận xoá</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            Bạn có chắc chắn muốn xoá lịch học "{selectedSchedule.title}"?
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={() => setDeleteOpenDialog(false)}>Huỷ</Button>
-                        <Button onClick={() => handleDelete(selectedSchedule)} color="error" variant="contained">
-                            Xoá
-                        </Button>
-                    </DialogActions>
-                </Dialog>
+                <DialogConfirm
+                    openDialog={openDeleteDialog}
+                    onClose={() => setDeleteOpenDialog(false)}
+                    onDelete={() => handleDelete(selectedSchedule)}
+                    text={`Bạn có chắc chắn muốn xoá lịch học "${selectedSchedule?.title}"?`}
+                />
             )}
 
             {snackbarOpen && (

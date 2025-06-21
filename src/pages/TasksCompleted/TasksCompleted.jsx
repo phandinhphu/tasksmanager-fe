@@ -208,8 +208,9 @@ export default function TasksCompleted() {
 
             <DialogConfirm
                 openDialog={openDialog}
-                onOpen={handleCloseDialog}
+                onClose={handleCloseDialog}
                 onDelete={() => handleDelete(selectedTask)}
+                text={`Bạn có chắc chắn muốn xóa công việc "${selectedTask?.task_name}"?`}
             />
 
             {response.message && (
