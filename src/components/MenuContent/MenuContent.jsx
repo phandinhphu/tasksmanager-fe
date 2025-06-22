@@ -17,6 +17,7 @@ import RemoveDoneIcon from '@mui/icons-material/RemoveDone';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
+import FeedbackIcon from '@mui/icons-material/Feedback';
 import { styled } from '@mui/material/styles';
 
 const mainListItems = [
@@ -28,6 +29,7 @@ const mainListItems = [
     { text: 'Tasks', icon: <AssignmentRoundedIcon />, path: '/tasks' },
     { text: 'Tasks Completed', icon: <ChecklistIcon />, path: '/tasks-completed' },
     { text: 'Tasks Overdue', icon: <RemoveDoneIcon />, path: '/tasks-overdue' },
+    { text: 'Feedback', icon: <FeedbackIcon />, path: '/feedback' },
 ];
 
 const secondaryListItems = [

@@ -25,3 +25,16 @@ export const deleteAccount = async () => {
         }
     }
 };
+
+export const sendFeedback = async (feedback, captchaToken) => {
+    try {
+        const response = await httpRequest.post('/user/me/feedback', { feedback, captchaToken });
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.message) {
+            throw new Error(error.response.data.message);
+        } else {
+            throw new Error('Có lỗi xảy ra. Vui lòng thử lại.');
+        }
+    }
+};
