@@ -13,6 +13,7 @@ import Alert from '@mui/material/Alert';
 import LoadingDialog from '../../components/LoadingDialog';
 import { styled } from '@mui/material/styles';
 import { useAuth } from '../../hooks/auth';
+import { API_URL } from '../../utils/constants';
 
 const Card = styled(MuiCard)(({ theme }) => ({
     display: 'flex',
@@ -297,7 +298,7 @@ export default function Register() {
                             color="primary"
                             sx={{ flexGrow: 1, mr: 1 }}
                             onClick={() => {
-                                window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
+                                window.location.href = `${API_URL}/api/auth/google`;
                             }}
                         >
                             Login with Google
@@ -307,7 +308,7 @@ export default function Register() {
                             color="primary"
                             sx={{ flexGrow: 1, ml: 1 }}
                             onClick={() => {
-                                window.location.href = `${import.meta.env.VITE_API_URL}/auth/facebook`;
+                                window.location.href = `${API_URL}/api/auth/facebook`;
                             }}
                         >
                             Login with Facebook

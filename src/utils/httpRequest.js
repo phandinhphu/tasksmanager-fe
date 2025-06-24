@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { API_URL } from './constants';
 
 const TaskManagerRequest = axios.create({
-    baseURL: `${import.meta.env.VITE_API_URL}/api` || 'http://localhost:3000/api', // Fallback to localhost
+    baseURL: `${API_URL}/api` || 'http://localhost:3000/api', // Fallback to localhost
     headers: {
         'Content-Type': 'application/json',
     },

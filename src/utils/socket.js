@@ -1,5 +1,7 @@
 import { io } from 'socket.io-client';
-const socket = io(import.meta.env.VITE_API_URL, {
+import { API_URL } from './constants';
+
+const socket = io(API_URL, {
     withCredentials: true,
     transports: ['websocket', 'polling'],
 });

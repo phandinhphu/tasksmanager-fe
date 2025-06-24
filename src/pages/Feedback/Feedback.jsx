@@ -4,7 +4,7 @@ import SendIcon from '@mui/icons-material/Send';
 import ReCAPTCHA from 'react-google-recaptcha';
 import LoadingDialog from '../../components/LoadingDialog';
 import { useAuth } from '../../hooks/auth';
-import { GOOGLE_CAPTCHA_SITE_KEY } from '../../utils/constant';
+import { GOOGLE_CAPTCHA_SITE_KEY } from '../../utils/constants';
 import * as userServices from '../../services/userServices';
 
 const Feedback = () => {

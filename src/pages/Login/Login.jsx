@@ -16,6 +16,8 @@ import ForgotPassword from '../../components/ForgotPassword';
 import LoadingDialog from '../../components/LoadingDialog';
 import { useAuth } from '../../hooks/auth';
 import { getCurrentUser } from '../../services/authServices';
+import { API_URL } from '../../utils/constants';
+
 const Card = styled(MuiCard)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -266,7 +268,7 @@ export default function SignIn() {
                             color="primary"
                             sx={{ flexGrow: 1, mr: 1 }}
                             onClick={() => {
-                                window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/google`;
+                                window.location.href = `${API_URL}/api/auth/google`;
                             }}
                         >
                             Login with Google
@@ -276,7 +278,7 @@ export default function SignIn() {
                             color="primary"
                             sx={{ flexGrow: 1, ml: 1 }}
                             onClick={() => {
-                                window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/facebook`;
+                                window.location.href = `${API_URL}/api/auth/facebook`;
                             }}
                         >
                             Login with Facebook
