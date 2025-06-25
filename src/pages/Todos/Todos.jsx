@@ -8,7 +8,6 @@ import confetti from 'canvas-confetti';
 const TaskCard = ({ task, onComplete }) => {
     const taskDate = dayjs(task?.extend_date || task?.end_date).tz();
     const now = dayjs().tz();
-    const isOverdue = taskDate.isBefore(now);
 
     return (
         <Card

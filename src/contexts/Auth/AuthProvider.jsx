@@ -14,9 +14,7 @@ export const AuthProvider = ({ children }) => {
                 const response = await getCurrentUser();
                 setUser(response);
             } catch (error) {
-                if (error.response?.status === 401) {
-                    setUser(null);
-                }
+                setUser(null);
             } finally {
                 setLoading(false);
             }

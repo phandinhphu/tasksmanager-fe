@@ -6,7 +6,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CardTask from '../../components/CardTask/CardTask';
 import SnackbarAlert from '../../components/SnackbarAlert';
-import DialogConfirm from '../../components/DialogConfirm/DialogConfirm';
+import DialogConfirm from '../../components/DialogConfirm';
+import LoadingDialog from '../../components/LoadingDialog';
 import confetti from 'canvas-confetti';
 import { useTasks, useDeleteTask, useUpdateTaskComplete, useUpdateSubtaskComplete } from '../../hooks/tasks';
 import { useStatusPriority } from '../../hooks/status-priority';
@@ -173,6 +174,10 @@ export default function TasksOverdue() {
 
     return (
         <Box sx={{ maxWidth: 900, mx: 'auto', mt: 5, mb: 5 }}>
+            <LoadingDialog
+                open={deleteTask.isLoading || updateTaskComplete.isLoading || updateSubtaskComplete.isLoading}
+            />
+
             <Typography variant="h4" fontWeight={700} mb={3}>
                 Danh sách công việc quá hạn
             </Typography>
