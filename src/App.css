@@ -40,3 +40,15 @@
 .read-the-docs {
     color: #888;
 }
+
+/* Now indicator customization */
+.fc-timegrid-now-indicator-line {
+    border-color: #ff4444 !important; /* Màu đỏ nhạt hơn */
+    border-width: 1px !important;
+    opacity: 0.8 !important;
+}
+
+.fc-timegrid-now-indicator-arrow {
+    border-left-color: #ff4444 !important;
+    border-right-color: #ff4444 !important;
+}

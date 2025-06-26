@@ -29,22 +29,38 @@ const Home = () => {
             const tasksFiltered = tasks.filter((t) => t.completed === false && t.status.name !== 'Overdue');
 
             return tasksFiltered
-                ? tasksFiltered.flatMap((task) => ({
-                      id: `task-${task._id}`,
-                      group: `task-${task._id}`,
-                      title: task.task_name,
-                      start: dayjs(task.start_date).format('YYYY-MM-DDTHH:mm:ss'),
-                      end: dayjs(task?.extend_date || task.end_date).format('YYYY-MM-DDTHH:mm:ss'),
-                      description: task.task_description,
-                      status: task.status,
-                      priority: task.priority,
-                      subtasks: task.subtasks,
-                      extendedProps: {
-                          taskId: task._id,
-                          extend_date: task?.extend_date ? dayjs(task.extend_date).format('YYYY-MM-DDTHH:mm:ss') : null,
-                          isExtension: true,
-                      },
-                  }))
+                ? tasksFiltered.flatMap((task) => {
+                      const startDate = dayjs(task.start_date);
+                      const endDate = dayjs(task?.extend_date || task.end_date);
+
+                      // Kiểm tra xem task có kéo dài nhiều ngày không
+                      const isMultiDay = endDate.diff(startDate, 'day') > 0;
+
+                      return {
+                          id: `task-${task._id}`,
+                          group: `task-${task._id}`,
+                          title: task.task_name,
+                          start: startDate.format('YYYY-MM-DDTHH:mm:ss'),
+                          end: endDate.format('YYYY-MM-DDTHH:mm:ss'),
+                          description: task.task_description,
+                          status: task.status,
+                          priority: task.priority,
+                          subtasks: task.subtasks,
+                          allDay: isMultiDay, // Task kéo dài nhiều ngày sẽ hiển thị dạng all-day
+                          extendedProps: {
+                              taskId: task._id,
+                              extend_date: task?.extend_date
+                                  ? dayjs(task.extend_date).format('YYYY-MM-DDTHH:mm:ss')
+                                  : null,
+                              isExtension: true,
+                              isMultiDay: isMultiDay,
+                              description: task.task_description,
+                              status: task.status,
+                              priority: task.priority,
+                              subtasks: task.subtasks,
+                          },
+                      };
+                  })
                 : [];
         };
 
@@ -105,6 +121,7 @@ const Home = () => {
             start: info.event.start ? info.event.start.toISOString() : null,
             end: info.event.end ? info.event.end.toISOString() : null,
             extend_date: info.event.extendedProps?.extend_date || null,
+            isMultiDay: info.event.extendedProps?.isMultiDay || false,
         });
         setOpen(true); // Open the task detail dialog
     };
@@ -209,9 +226,9 @@ const Home = () => {
                     eventStartEditable={false}
                     eventDurationEditable={true}
                     eventResizableFromStart={false}
-                    allDaySlot={false}
-                    slotMinTime="06:00:00"
-                    slotMaxTime="22:00:00"
+                    allDaySlot={true}
+                    slotMinTime="00:00:00"
+                    slotMaxTime="24:00:00"
                     events={events}
                     eventClick={(info) => {
                         if (info.event.id.startsWith('schedule-')) {
@@ -241,6 +258,17 @@ const Home = () => {
                         handleResize(taskId, newEndDate, info);
                     }}
                     height="auto"
+                    expandRows={true}
+                    dayMaxEvents={false}
+                    moreLinkClick="popover"
+                    nowIndicator={true}
+                    businessHours={{
+                        daysOfWeek: [1, 2, 3, 4, 5, 6, 0], // Tất cả các ngày trong tuần
+                        startTime: '00:00',
+                        endTime: '24:00',
+                    }}
+                    scrollTime="08:00:00"
+                    scrollTimeReset={false}
                 />
             </div>
 
