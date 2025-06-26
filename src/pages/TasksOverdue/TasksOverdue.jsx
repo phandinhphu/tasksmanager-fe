@@ -34,13 +34,12 @@ export default function TasksOverdue() {
             const subTasks = tasks.reduce((acc, task) => {
                 const tmp = (task.subtasks || []).map((subtask) => ({
                     ...subtask,
-                    maintask: task.name,
+                    maintask: task.task_name,
                     maintask_id: task._id,
                 }));
                 acc.push(...tmp);
                 return acc;
             }, []);
-
             setAllTasks([...tasks, ...subTasks]);
         }
     }, [tasks]);

@@ -111,12 +111,18 @@ const TodosPage = () => {
     );
     const allTasks = [...tasks, ...allSubtasks];
 
-    const todayTasks = allTasks.filter(
-        (task) =>
-            dayjs(task.start_date).tz().isSameOrAfter(startOfToday) &&
-            dayjs(task.start_date).tz().isSameOrBefore(endOfToday) &&
-            task.status?.name === 'In Progress',
-    );
+    const todayTasks = allTasks.filter((task) => {
+        const taskStartDate = dayjs(task.start_date).tz();
+        const taskEndDate = dayjs(task?.extend_date || task?.end_date).tz();
+
+        // Task được hiển thị trong "Hôm nay" nếu:
+        // 1. Hôm nay nằm trong khoảng thời gian thực hiện task (từ start_date đến end_date)
+        // 2. Hoặc task có deadline là hôm nay
+        const isInProgress = taskStartDate.isSameOrBefore(endOfToday) && taskEndDate.isSameOrAfter(startOfToday);
+        const hasDeadlineToday = taskEndDate.isSameOrAfter(startOfToday) && taskEndDate.isSameOrBefore(endOfToday);
+
+        return (isInProgress || hasDeadlineToday) && task.status?.name === 'In Progress';
+    });
     const upcomingTasks = allTasks.filter(
         (task) =>
             dayjs(task?.extend_date || task?.end_date)
