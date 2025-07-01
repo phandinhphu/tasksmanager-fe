@@ -8,8 +8,6 @@ import vi from 'date-fns/locale/vi';
 const DateTimeOrTimeRangePicker = ({ value, mainTask, onChange }) => {
     const [start, setStart] = React.useState(value?.start || new Date());
     const [end, setEnd] = React.useState(value?.end || new Date());
-    const [startDateError, setStartDateError] = React.useState('');
-    const [endDateError, setEndDateError] = React.useState('');
 
     const mainStart = mainTask?.start_date ? dayjs(mainTask.start_date) : null;
     const mainEnd = mainTask?.end_date ? dayjs(mainTask.end_date) : null;
@@ -65,19 +63,6 @@ const DateTimeOrTimeRangePicker = ({ value, mainTask, onChange }) => {
         [mainEnd],
     );
 
-    // Helper function to get min datetime for end date
-    const getMinDateTimeForEnd = React.useCallback(
-        (selectedDate) => {
-            if (mainTask) {
-                return getMinDateTime(selectedDate);
-            }
-            // Nếu không có mainTask, cho phép end date từ đầu ngày được chọn
-            // Điều này cho phép end time nhỏ hơn start time trong cùng ngày
-            return dayjs(selectedDate).startOf('day').toDate();
-        },
-        [mainTask, getMinDateTime],
-    );
-
     return (
         <Box>
             <FormLabel component="legend" sx={{ mb: 2 }}>
@@ -90,37 +75,17 @@ const DateTimeOrTimeRangePicker = ({ value, mainTask, onChange }) => {
                         label="Ngày giờ bắt đầu"
                         value={start}
                         onChange={(newValue) => setStart(newValue)}
-                        onError={(reason) => setStartDateError(reason)}
                         minDateTime={mainTask ? getMinDateTime(start) : dayjs().startOf('day').toDate()}
                         maxDateTime={mainTask ? getMaxDateTime(start) : null}
                         enableAccessibleFieldDOMStructure={false}
-                        slots={{ textField: TextField }}
-                        slotProps={{
-                            textField: {
-                                margin: 'dense',
-                                fullWidth: true,
-                                error: !!startDateError,
-                                helperText: startDateError ? 'Ngày không hợp lệ' : '',
-                            },
-                        }}
                     />
                     <DateTimePicker
                         label="Ngày giờ kết thúc"
                         value={end}
                         onChange={(newValue) => setEnd(newValue)}
-                        onError={(reason) => setEndDateError(reason)}
-                        minDateTime={mainTask ? getMinDateTime(end) : getMinDateTimeForEnd(end)}
+                        minDateTime={mainTask ? getMinDateTime(end) : start}
                         maxDateTime={mainTask ? getMaxDateTime(end) : null}
                         enableAccessibleFieldDOMStructure={false}
-                        slots={{ textField: TextField }}
-                        slotProps={{
-                            textField: {
-                                margin: 'dense',
-                                fullWidth: true,
-                                error: !!endDateError,
-                                helperText: endDateError ? 'Ngày không hợp lệ' : '',
-                            },
-                        }}
                     />
                 </Box>
             </LocalizationProvider>
