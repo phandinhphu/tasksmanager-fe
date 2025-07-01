@@ -137,7 +137,7 @@ const TodosPage = () => {
         (task) =>
             dayjs(task?.extend_date || task?.end_date)
                 .tz()
-                .isBefore(startOfToday) && task.status?.name === 'Overdue',
+                .isSameOrBefore(startOfToday) && task.status?.name === 'Overdue',
     );
 
     return (
