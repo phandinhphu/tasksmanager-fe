@@ -206,6 +206,21 @@ const Home = () => {
                 p: 2,
                 borderRadius: 1,
                 backgroundColor: 'background.paper',
+                // Thêm CSS để hiển thị cursor pointer khi hover vào events
+                '& .fc-event': {
+                    cursor: 'pointer',
+                },
+                '& .fc-event:hover': {
+                    cursor: 'pointer',
+                },
+                // Đặc biệt cho events trong dayGrid (month view)
+                '& .fc-daygrid-event': {
+                    cursor: 'pointer',
+                },
+                // Đặc biệt cho events trong timeGrid (week/day view)
+                '& .fc-timegrid-event': {
+                    cursor: 'pointer',
+                },
             }}
         >
             <div
