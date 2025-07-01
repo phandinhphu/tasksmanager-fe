@@ -16,7 +16,10 @@ const DateTimeOrTimeRangePicker = ({ value, mainTask, onChange }) => {
 
     React.useEffect(() => {
         if (onChange) {
-            onChange({ start, end, pickerType });
+            const normalizedStart = normalizeDate(start);
+            const normalizedEnd = normalizeDate(end);
+
+            onChange({ start: normalizedStart, end: normalizedEnd, pickerType });
         }
     }, [start, end, pickerType, onChange]);
 
@@ -27,6 +30,14 @@ const DateTimeOrTimeRangePicker = ({ value, mainTask, onChange }) => {
             setPickerType(value.pickerType || 'dateTime');
         }
     }, [value]);
+
+    function normalizeDate(date) {
+        if (!date) return date;
+        const normalized = new Date(date);
+        normalized.setSeconds(0);
+        normalized.setMilliseconds(0);
+        return normalized;
+    }
 
     const handlePickerTypeChange = (event) => {
         setPickerType(event.target.value);
