@@ -7,7 +7,7 @@
 ![Material-UI](https://img.shields.io/badge/Material--UI-7.0.2-0081CB?style=for-the-badge&logo=material-ui&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-*Ứng dụng quản lý công việc cá nhân và lịch học hiện đại, được xây dựng với React & Material-UI*
+_Ứng dụng quản lý công việc cá nhân và lịch học hiện đại, được xây dựng với React & Material-UI_
 
 [📱 Demo Live](#) | [📖 Tài liệu](#tài-liệu-tham-khảo) | [🐛 Báo lỗi](https://github.com/phandinhphu/tasksmanager-fe/issues)
 
@@ -16,6 +16,7 @@
 ## ✨ Tính năng chính
 
 ### 🎯 **Quản lý công việc thông minh**
+
 - ✅ **Task chính & Task phụ**: Tổ chức công việc theo cấu trúc phân cấp
 - 🏷️ **Phân loại đa dạng**: Trạng thái (To Do, In Progress, Completed, Overdue) và độ ưu tiên (High, Medium, Low)
 - 🔍 **Tìm kiếm & Lọc**: Tìm kiếm nhanh theo từ khóa, lọc theo trạng thái, độ ưu tiên
@@ -23,21 +24,24 @@
 - 🎊 **Hiệu ứng hoàn thành**: Hiệu ứng pháo hoa khi hoàn thành task
 
 ### 📅 **Quản lý lịch học & Lịch trình**
+
 - 📚 **Lịch học linh hoạt**: Tạo lịch học với lặp lại theo ngày/tuần/tháng
 - 🗓️ **Calendar tích hợp**: Hiển thị task và lịch học trên FullCalendar
-- ⏰ **Drag & Drop**: Kéo thả để điều chỉnh thời gian task trực tiếp trên lịch
 - 🔄 **Lịch học lặp lại**: Hỗ trợ lịch học theo tuần với nhiều ngày trong tuần
 
 ### 🔔 **Thông báo & Nhắc nhở**
+
 - ⚡ **Real-time notifications**: Nhận thông báo nhắc nhở qua Socket.IO
 - 🌐 **Đa thiết bị**: Đồng bộ thông báo trên mọi thiết bị đăng nhập
 
 ### 👤 **Quản lý tài khoản**
+
 - 🔐 **Xác thực đa dạng**: Đăng nhập Email/Password, Google, Facebook
 - 👤 **Hồ sơ cá nhân**: Quản lý thông tin, thống kê công việc với biểu đồ
 - 🔑 **Bảo mật**: JWT token, forgot password, email verification
 
 ### 📊 **Dashboard & Thống kê**
+
 - 📈 **Biểu đồ trực quan**: Thống kê công việc với Chart.js (Pie chart)
 - 📋 **Trang Todos**: Hiển thị công việc hôm nay, sắp đến hạn, quá hạn
 - 📱 **Responsive**: Giao diện thích ứng hoàn hảo trên mọi thiết bị
@@ -45,37 +49,42 @@
 ## 🛠️ Công nghệ sử dụng
 
 ### **Frontend Core**
-| Công nghệ | Phiên bản | Mô tả |
-|-----------|-----------|-------|
-| [React](https://react.dev/) | 19.0.0 | Thư viện UI hiện đại |
-| [Vite](https://vitejs.dev/) | 6.3.0 | Build tool siêu nhanh |
-| [Material-UI](https://mui.com/) | 7.0.2 | Component library chuyên nghiệp |
+
+| Công nghệ                       | Phiên bản | Mô tả                           |
+| ------------------------------- | --------- | ------------------------------- |
+| [React](https://react.dev/)     | 19.0.0    | Thư viện UI hiện đại            |
+| [Vite](https://vitejs.dev/)     | 6.3.0     | Build tool siêu nhanh           |
+| [Material-UI](https://mui.com/) | 7.0.2     | Component library chuyên nghiệp |
 
 ### **State Management & Data Fetching**
-| Công nghệ | Phiên bản | Mô tả |
-|-----------|-----------|-------|
-| [@tanstack/react-query](https://tanstack.com/query/latest) | 5.75.1 | Server state management |
-| [Axios](https://axios-http.com/) | 1.9.0 | HTTP client |
+
+| Công nghệ                                                  | Phiên bản | Mô tả                   |
+| ---------------------------------------------------------- | --------- | ----------------------- |
+| [@tanstack/react-query](https://tanstack.com/query/latest) | 5.75.1    | Server state management |
+| [Axios](https://axios-http.com/)                           | 1.9.0     | HTTP client             |
 
 ### **UI/UX Enhancement**
-| Công nghệ | Phiên bản | Mô tả |
-|-----------|-----------|-------|
-| [FullCalendar](https://fullcalendar.io/) | 6.1.17 | Calendar component mạnh mẽ |
-| [Chart.js](https://www.chartjs.org/) | 4.4.9 | Thư viện biểu đồ |
-| [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti) | 1.9.3 | Hiệu ứng hoàn thành task |
-| [React Toastify](https://github.com/fkhadra/react-toastify) | 11.0.5 | Notification system |
+
+| Công nghệ                                                        | Phiên bản | Mô tả                      |
+| ---------------------------------------------------------------- | --------- | -------------------------- |
+| [FullCalendar](https://fullcalendar.io/)                         | 6.1.17    | Calendar component mạnh mẽ |
+| [Chart.js](https://www.chartjs.org/)                             | 4.4.9     | Thư viện biểu đồ           |
+| [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti) | 1.9.3     | Hiệu ứng hoàn thành task   |
+| [React Toastify](https://github.com/fkhadra/react-toastify)      | 11.0.5    | Notification system        |
 
 ### **Utilities & Tools**
-| Công nghệ | Phiên bản | Mô tả |
-|-----------|-----------|-------|
-| [Day.js](https://day.js.org/) | 1.11.13 | Thư viện xử lý thời gian |
-| [Socket.io Client](https://socket.io/) | 4.8.1 | Real-time communication |
-| [React Router](https://reactrouter.com/) | 7.5.0 | Routing |
+
+| Công nghệ                                | Phiên bản | Mô tả                    |
+| ---------------------------------------- | --------- | ------------------------ |
+| [Day.js](https://day.js.org/)            | 1.11.13   | Thư viện xử lý thời gian |
+| [Socket.io Client](https://socket.io/)   | 4.8.1     | Real-time communication  |
+| [React Router](https://reactrouter.com/) | 7.5.0     | Routing                  |
 
 ## 🚀 Cài đặt & Chạy dự án
 
 ### **Yêu cầu hệ thống**
-- Node.js 18+ 
+
+- Node.js 18+
 - npm hoặc yarn
 - Git
 
@@ -180,27 +189,32 @@ npm run beautiful
 ## 🎮 Hướng dẫn sử dụng
 
 ### **1. 🔐 Đăng nhập/Đăng ký**
+
 - Tạo tài khoản mới hoặc đăng nhập
 - Hỗ trợ đăng nhập bằng Google/Facebook
 - Quên mật khẩu với email verification
 
 ### **2. 📋 Quản lý Tasks**
+
 - **Tạo task**: Nhấn "Add Task" → Điền thông tin → Chọn loại (Main/Sub)
 - **Chỉnh sửa**: Click vào task → Cập nhật thông tin
 - **Hoàn thành**: Nhấn nút "Hoàn thành" → Thưởng thức hiệu ứng pháo hoa! 🎊
 - **Lọc & Tìm kiếm**: Sử dụng thanh tìm kiếm và bộ lọc
 
 ### **3. 📅 Quản lý Lịch học**
+
 - **Tạo lịch**: "Add Schedule" → Nhập môn học, chọn ngày, giờ học
 - **Xem lịch**: Trang "Home" hiển thị lịch tích hợp với tasks
 - **Chỉnh sửa**: Drag & drop để thay đổi thời gian
 
 ### **4. 🎯 Todos Dashboard**
+
 - **Hôm nay**: Tasks cần làm trong ngày
-- **Sắp đến hạn**: Tasks trong 3 ngày tới  
+- **Sắp đến hạn**: Tasks trong 3 ngày tới
 - **Quá hạn**: Tasks đã quá deadline
 
 ### **5. 📊 Thống kê**
+
 - Xem profile để thấy biểu đồ thống kê công việc
 - Theo dõi hiệu suất làm việc theo thời gian
 
@@ -209,22 +223,26 @@ npm run beautiful
 <div align="center">
 
 ### 🏠 Dashboard
-*Giao diện chính với calendar tích hợp*
 
-### 📋 Task Management  
-*Quản lý công việc với search & filter*
+_Giao diện chính với calendar tích hợp_
+
+### 📋 Task Management
+
+_Quản lý công việc với search & filter_
 
 ### 📅 Schedule Management
-*Lên lịch học linh hoạt*
+
+_Lên lịch học linh hoạt_
 
 ### 📊 Profile & Stats
-*Thống kê cá nhân với biểu đồ*
+
+_Thống kê cá nhân với biểu đồ_
 
 </div>
 
 ## 🤝 Đóng góp
 
-Chúng tôi hoan nghênh mọi đóng góp! 
+Chúng tôi hoan nghênh mọi đóng góp!
 
 1. Fork repository
 2. Tạo feature branch (`git checkout -b feature/AmazingFeature`)
@@ -259,7 +277,7 @@ Chúng tôi hoan nghênh mọi đóng góp!
 
 ## 📞 Liên hệ
 
-- 📧 **Frontend**: phuphandinh2004@email.com  
+- 📧 **Frontend**: phuphandinh2004@email.com
 - 📧 **Backend**: groovemusic4399@pm.me
 - 🔗 **Frontend Repo**: [tasksmanager-fe](https://github.com/phandinhphu/tasksmanager-fe)
 - 🔗 **Backend Repo**: [tasksmanager-be](https://github.com/phandinhphu/tasksmanager-be)
@@ -274,6 +292,6 @@ Dự án này được phát hành dưới giấy phép MIT. Xem file [LICENSE](
 
 **⭐ Nếu dự án hữu ích, hãy cho chúng tôi một star! ⭐**
 
-*Được xây dựng với ❤️ bởi đội ngũ Tasks Manager*
+_Được xây dựng với ❤️ bởi đội ngũ Tasks Manager_
 
 </div>

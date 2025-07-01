@@ -29,11 +29,11 @@ const AddTask = () => {
     const updateTask = useUpdateTask();
 
     const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [dateTimeRange, setDateTimeRange] = useState({
+    const [dateTimeRange, setDateTimeRange] = useState(() => ({
         start: new Date(),
         end: new Date(),
-        mode: 'datetime',
-    });
+        pickerType: 'dateTime',
+    }));
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
     const [mainTasks, setMainTasks] = useState([]);
@@ -100,7 +100,17 @@ const AddTask = () => {
     };
 
     const handleDateTimeChange = useCallback((newRange) => {
-        setDateTimeRange(newRange);
+        setDateTimeRange((prevRange) => {
+            // So sánh để tránh update không cần thiết
+            if (
+                prevRange.start?.getTime() === newRange.start?.getTime() &&
+                prevRange.end?.getTime() === newRange.end?.getTime() &&
+                prevRange.pickerType === newRange.pickerType
+            ) {
+                return prevRange;
+            }
+            return newRange;
+        });
     }, []);
 
     const handleStatusChange = useCallback((event) => {

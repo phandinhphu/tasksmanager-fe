@@ -3,6 +3,8 @@ import { Grid } from '@mui/material';
 import CardTask from '../CardTask';
 
 const ListTasks = ({ tasks }) => {
+    console.log('ListTasks rendered');
+
     return (
         <Grid container spacing={2}>
             {tasks &&

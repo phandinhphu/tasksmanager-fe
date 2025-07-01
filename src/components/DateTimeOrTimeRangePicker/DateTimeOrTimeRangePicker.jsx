@@ -14,47 +14,67 @@ const DateTimeOrTimeRangePicker = ({ value, mainTask, onChange }) => {
     const mainStart = mainTask?.start_date ? dayjs(mainTask.start_date) : null;
     const mainEnd = mainTask?.end_date ? dayjs(mainTask.end_date) : null;
 
-    React.useEffect(() => {
-        if (onChange) {
-            const normalizedStart = normalizeDate(start);
-            const normalizedEnd = normalizeDate(end);
-
-            onChange({ start: normalizedStart, end: normalizedEnd, pickerType });
-        }
-    }, [start, end, pickerType, onChange]);
-
-    React.useEffect(() => {
-        if (value) {
-            setStart(value.start || new Date());
-            setEnd(value.end || new Date());
-            setPickerType(value.pickerType || 'dateTime');
-        }
-    }, [value]);
-
-    function normalizeDate(date) {
+    // Memoize hàm normalizeDate để tránh tạo mới mỗi lần render
+    const normalizeDate = React.useCallback((date) => {
         if (!date) return date;
         const normalized = new Date(date);
         normalized.setSeconds(0);
         normalized.setMilliseconds(0);
         return normalized;
-    }
+    }, []);
+
+    // Memoize giá trị để tránh tạo object mới mỗi lần
+    const normalizedValue = React.useMemo(
+        () => ({
+            start: normalizeDate(start),
+            end: normalizeDate(end),
+            pickerType,
+        }),
+        [start, end, pickerType, normalizeDate],
+    );
+
+    React.useEffect(() => {
+        if (onChange) {
+            onChange(normalizedValue);
+        }
+    }, [normalizedValue]);
+
+    // Tách riêng useEffect cho việc cập nhật từ props để tránh loop
+    React.useEffect(() => {
+        if (
+            value &&
+            (value.start?.getTime() !== start?.getTime() ||
+                value.end?.getTime() !== end?.getTime() ||
+                value.pickerType !== pickerType)
+        ) {
+            setStart(value.start || new Date());
+            setEnd(value.end || new Date());
+            setPickerType(value.pickerType || 'dateTime');
+        }
+    }, [value?.start, value?.end, value?.pickerType]);
 
     const handlePickerTypeChange = (event) => {
         setPickerType(event.target.value);
     };
 
-    // Helpers để xử lý min/max cho ngày/giờ
-    const getMinDateTime = (selectedDate) => {
-        if (!mainStart) return null;
-        const selected = dayjs(selectedDate);
-        return selected.isSame(mainStart, 'day') ? mainStart.toDate() : mainStart.startOf('day').toDate();
-    };
+    // Memoize các helper functions để tránh re-render
+    const getMinDateTime = React.useCallback(
+        (selectedDate) => {
+            if (!mainStart) return null;
+            const selected = dayjs(selectedDate);
+            return selected.isSame(mainStart, 'day') ? mainStart.toDate() : mainStart.startOf('day').toDate();
+        },
+        [mainStart],
+    );
 
-    const getMaxDateTime = (selectedDate) => {
-        if (!mainEnd) return null;
-        const selected = dayjs(selectedDate);
-        return selected.isSame(mainEnd, 'day') ? mainEnd.toDate() : mainEnd.endOf('day').toDate();
-    };
+    const getMaxDateTime = React.useCallback(
+        (selectedDate) => {
+            if (!mainEnd) return null;
+            const selected = dayjs(selectedDate);
+            return selected.isSame(mainEnd, 'day') ? mainEnd.toDate() : mainEnd.endOf('day').toDate();
+        },
+        [mainEnd],
+    );
 
     return (
         <Box>
