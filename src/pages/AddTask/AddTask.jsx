@@ -32,7 +32,6 @@ const AddTask = () => {
     const [dateTimeRange, setDateTimeRange] = useState(() => ({
         start: new Date(),
         end: new Date(),
-        pickerType: 'dateTime',
     }));
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
@@ -104,8 +103,7 @@ const AddTask = () => {
             // So sánh để tránh update không cần thiết
             if (
                 prevRange.start?.getTime() === newRange.start?.getTime() &&
-                prevRange.end?.getTime() === newRange.end?.getTime() &&
-                prevRange.pickerType === newRange.pickerType
+                prevRange.end?.getTime() === newRange.end?.getTime()
             ) {
                 return prevRange;
             }
