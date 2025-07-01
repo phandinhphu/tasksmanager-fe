@@ -174,7 +174,7 @@ export default function TasksOverdue() {
     return (
         <Box sx={{ maxWidth: 900, mx: 'auto', mt: 5, mb: 5 }}>
             <LoadingDialog
-                open={deleteTask.isLoading || updateTaskComplete.isLoading || updateSubtaskComplete.isLoading}
+                open={deleteTask.isPending || updateTaskComplete.isPending || updateSubtaskComplete.isPending}
             />
 
             <Typography variant="h4" fontWeight={700} mb={3}>

@@ -15,6 +15,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CardTask from '../../components/CardTask/CardTask';
 import SnackbarAlert from '../../components/SnackbarAlert';
 import DialogConfirm from '../../components/DialogConfirm';
+import LoadingDialog from '../../components/LoadingDialog';
 import { useTasks, useDeleteTask } from '../../hooks/tasks';
 import { useStatusPriority } from '../../hooks/status-priority';
 
@@ -136,6 +137,8 @@ export default function TasksCompleted() {
 
     return (
         <Box sx={{ maxWidth: 900, mx: 'auto', mt: 5, mb: 5 }}>
+            <LoadingDialog open={deleteTask.isPending} />
+
             <Typography variant="h4" fontWeight={700} mb={3}>
                 Danh sách công việc đã hoàn thành
             </Typography>
