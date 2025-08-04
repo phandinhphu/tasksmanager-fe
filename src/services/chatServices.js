@@ -1,8 +1,8 @@
 import * as httpRequest from '../utils/httpRequest';
 
-export const updateUser = async (user) => {
+export const getRooms = async () => {
     try {
-        const response = await httpRequest.put('/user/me/update-profile', user);
+        const response = await httpRequest.get('/chat/me/rooms');
         return response.data;
     } catch (error) {
         if (error.response && error.response.data.message) {
@@ -13,9 +13,9 @@ export const updateUser = async (user) => {
     }
 };
 
-export const deleteAccount = async () => {
+export const createRoom = async (roomData) => {
     try {
-        const response = await httpRequest.del('/user/me/delete-account');
+        const response = await httpRequest.post('/chat/rooms', roomData);
         return response.data;
     } catch (error) {
         if (error.response && error.response.data.message) {
@@ -26,9 +26,9 @@ export const deleteAccount = async () => {
     }
 };
 
-export const sendFeedback = async (feedback, captchaToken) => {
+export const getRoom = async (roomId) => {
     try {
-        const response = await httpRequest.post('/user/me/feedback', { feedback, captchaToken });
+        const response = await httpRequest.get(`/chat/rooms/${roomId}`);
         return response.data;
     } catch (error) {
         if (error.response && error.response.data.message) {
@@ -39,10 +39,10 @@ export const sendFeedback = async (feedback, captchaToken) => {
     }
 };
 
-export const checkUserExist = async (email) => {
+export const sendMessage = async (roomId, messageData) => {
     try {
-        const response = await httpRequest.get(`/user/check-exist?email=${encodeURIComponent(email)}`);
-        return response.data.exists;
+        const response = await httpRequest.post(`/chat/rooms/${roomId}/messages`, messageData);
+        return response.data;
     } catch (error) {
         if (error.response && error.response.data.message) {
             throw new Error(error.response.data.message);

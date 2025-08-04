@@ -19,6 +19,7 @@ const VerifySuccess = lazy(() => import('../pages/VerifySuccess'));
 const VerifyFail = lazy(() => import('../pages/VerifyFail'));
 const ResetPassword = lazy(() => import('../pages/ResetPassword'));
 const Feedback = lazy(() => import('../pages/Feedback'));
+const Chat = lazy(() => import('../pages/Chat'));
 
 const publicRoutes = [
     { path: '/', component: Home, layout: DefaultLayout, requiresAuth: true },
@@ -40,6 +41,7 @@ const publicRoutes = [
     { path: '/verify-fail', component: VerifyFail, layout: null, requiresAuth: false },
     { path: '/reset-password', component: ResetPassword, layout: null, requiresAuth: false },
     { path: '/feedback', component: Feedback, layout: DefaultLayout, requiresAuth: true },
+    { path: '/chat', component: Chat, layout: DefaultLayout, requiresAuth: true },
 ];
 
 export default publicRoutes;

@@ -18,6 +18,7 @@ import AddTaskIcon from '@mui/icons-material/AddTask';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import FeedbackIcon from '@mui/icons-material/Feedback';
+import ChatIcon from '@mui/icons-material/Chat';
 import { styled } from '@mui/material/styles';
 
 const mainListItems = [
@@ -30,6 +31,7 @@ const mainListItems = [
     { text: 'Tasks Completed', icon: <ChecklistIcon />, path: '/tasks-completed' },
     { text: 'Tasks Overdue', icon: <RemoveDoneIcon />, path: '/tasks-overdue' },
     { text: 'Feedback', icon: <FeedbackIcon />, path: '/feedback' },
+    { text: 'Chat', icon: <ChatIcon />, path: '/chat' },
 ];
 
 const secondaryListItems = [

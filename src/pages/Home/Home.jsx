@@ -4,7 +4,9 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
 import Box from '@mui/material/Box';
+import tippy from 'tippy.js';
 import TaskDetail from '../../components/TaskDetail';
 import SnackbarAlert from '../../components/SnackbarAlert';
 import dayjs from '../../utils/dayjsConfig';
@@ -12,6 +14,8 @@ import moment from 'moment';
 import * as taskServices from '../../services/taskServices';
 import { useTasks, useUpdateTask } from '../../hooks/tasks';
 import { useSchedules } from '../../hooks/schedules';
+import '../../style/calendar.css';
+import 'tippy.js/dist/tippy.css';
 
 const Home = () => {
     const { data: tasks = [], isLoading: isLoadingTasks, isFetching: isFetchingTasks } = useTasks();
@@ -58,7 +62,10 @@ const Home = () => {
                               status: task.status,
                               priority: task.priority,
                               subtasks: task.subtasks,
+                              category: 'task',
                           },
+                          backgroundColor: '#7c3aed',
+                          borderColor: '#7c3aed',
                       };
                   })
                 : [];
@@ -83,7 +90,11 @@ const Home = () => {
                                 title: schedule.title,
                                 start,
                                 end,
-                                backgroundColor: '#4CAF50',
+                                backgroundColor: '#d97706',
+                                borderColor: '#d97706',
+                                extendedProps: {
+                                    category: 'schedule',
+                                },
                             });
                         }
                     });
@@ -230,14 +241,16 @@ const Home = () => {
                 }}
             >
                 <FullCalendar
-                    plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin]}
+                    plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin, listPlugin]}
                     initialView="dayGridMonth"
                     headerToolbar={{
                         start: 'prev,next today',
                         center: 'title',
-                        end: 'dayGridMonth,timeGridWeek,timeGridDay',
+                        end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
                     }}
                     editable={true}
+                    weekends={true}
+                    dayMaxEvents={2}
                     eventStartEditable={false}
                     eventDurationEditable={true}
                     eventResizableFromStart={false}
@@ -253,12 +266,6 @@ const Home = () => {
                         handleViewDetails(info);
                     }}
                     eventResize={(info) => {
-                        if (info.view.type === 'dayGridMonth') {
-                            info.revert();
-                            alert('Vui lòng sử dụng chế độ xem tuần hoặc ngày để chỉnh sửa thời gian.');
-                            return;
-                        }
-
                         if (info.event.id.startsWith('schedule-')) {
                             info.revert();
                             alert(
@@ -274,7 +281,6 @@ const Home = () => {
                     }}
                     height="auto"
                     expandRows={true}
-                    dayMaxEvents={false}
                     moreLinkClick="popover"
                     nowIndicator={true}
                     businessHours={{
@@ -284,6 +290,14 @@ const Home = () => {
                     }}
                     scrollTime="08:00:00"
                     scrollTimeReset={false}
+                    moreLinkContent={(args) => {
+                        return `+${args.num} more`;
+                    }}
+                    eventDidMount={(info) => {
+                        tippy(info.el, {
+                            content: info.event.title,
+                        });
+                    }}
                 />
             </div>
 
